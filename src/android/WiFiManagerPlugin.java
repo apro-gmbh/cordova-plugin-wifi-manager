@@ -48,17 +48,17 @@ public class WiFiManagerPlugin extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+    }
 
+    @Override
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Context context = cordova.getActivity().getApplicationContext();
         if (isAndroidQOrLater()) {
             connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         } else {
             wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         }
-    }
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
             case "connect":
                 connect(args, callbackContext);
